@@ -33,9 +33,9 @@ jobs:
           
           docker pull babaolumoh/fastapi-app:latest
 
-          docker stop fastapi-container || true
+          docker stop fastapi-app || true
 
-          docker rm fastapi-container || true
+          docker rm fastapi-app || true
 
-          docker run -d --name fastapi-container -p 8000:8000 babaolumoh/fastapi-app:latest
+          docker run -d --name fastapi-app -p 8000:8000 babaolumoh/fastapi-app:latest
           EOF
