@@ -8,7 +8,7 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,3 +21,21 @@ jobs:
       run: |
           docker build -t babaolumoh/fastapi-app:latest .
           docker push babaolumoh/fastapi-app:latest
+
+    - name: Set up SSH key
+      run: |
+          echo "${{ secrets.EC2_SSH_KEY }}" | base64 --decode > fastapi.pem
+          chmod 400 fastapi.pem
+
+    - name: Deploy to EC2
+      run: |
+          ssh -o StrictHostKeyChecking=no -i fastapi.pem ubuntu@18.171.167.14 << 'EOF'
+          
+          docker pull babaolumoh/fastapi-app:latest
+
+          docker stop fastapi-app || true
+
+          docker rm fastapi-app || true
+
+          docker run -d --name fastapi-app -p 8000:8000 babaolumoh/fastapi-app:latest
+          EOF
