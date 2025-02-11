@@ -19,5 +19,5 @@ jobs:
 
     - name: Build and push Docker image
       run: |
-          docker build -t {{ secrets.DOCKER_USERNAME }}/fastapi-app .
-          docker push {{ secrets.DOCKER_USERNAME }}/fastapi-app
+          docker build -t babaolumoh/fastapi-app
+          docker push babaolumoh/fastapi-app
