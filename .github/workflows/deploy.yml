@@ -29,7 +29,7 @@ jobs:
 
     - name: Deploy to EC2
       run: |
-          ssh -o StrictHostKeyChecking=no -i fastapi.pem ubuntu@3.8.86.232 << 'EOF'
+          ssh -o StrictHostKeyChecking=no -i fastapi.pem ubuntu@13.40.37.66 << 'EOF'
           
           docker pull babaolumoh/fastapi-app:latest
 
