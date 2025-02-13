@@ -1,7 +1,7 @@
 name: deploy API
 
 on:
-  pull_request:
+  push:
     branches: [ "main" ]
 
 permissions:
@@ -39,3 +39,4 @@ jobs:
 
           docker run -d --name fastapi-app -p 8000:8000 babaolumoh/fastapi-app:latest
           EOF
+          
