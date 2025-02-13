@@ -1,8 +1,8 @@
-name: CI pipeline
+name: CI Pipeline
 
 on:
   pull_request:
-    branches: 
+    branches:
       - main
 
 jobs:
@@ -18,12 +18,10 @@ jobs:
         with:
           python-version: '3.9'
 
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
 
-      run: |
-        set -e
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-
-    - name: Test with pytest
-      run: |
-        pytest
+      - name: Run tests
+        run: pytest
