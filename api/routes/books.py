@@ -38,6 +38,9 @@ async def create_book(book: Book):
         status_code=status.HTTP_201_CREATED, content=book.model_dump()
     )
 
+@router.get("/", response_model=dict[int, Book], status_code=status.HTTP_200_OK)
+async def get_all_books():
+    return db.books
 
 @router.get("/{book_id}", response_model=Book, status_code=status.HTTP_200_OK)
 async def get_book(book_id: int):
@@ -60,6 +63,4 @@ async def delete_book(book_id: int) -> None:
     db.delete_book(book_id)
     return JSONResponse(status_code=status.HTTP_204_NO_CONTENT, content=None)
 
-@router.get("/", response_model=dict[int, Book], status_code=status.HTTP_200_OK)
-async def get_all_books():
-    return db.books
+
